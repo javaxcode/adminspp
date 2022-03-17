@@ -49,7 +49,6 @@ $juhal = "Share Profit";
                                                 <th>Action</th>
                                                 <th>Paket</th>
                                                 <th>Rank</th>
-
                                             </tr>
                                         </thead>
 
@@ -109,12 +108,12 @@ $juhal = "Share Profit";
                                                                         </div>
                                                                     </div>
                                                                     <div class="modal-footer">
-                                                                        <button type="button"
+                                                                        <!-- <button type="button"
                                                                             class="btn btn-secondary waves-effect"
-                                                                            data-bs-dismiss="modal">Close</button>
+                                                                            data-bs-dismiss="modal">Close</button> -->
                                                                         <button type="submit"
                                                                             class="btn btn-info waves-effect waves-light"
-                                                                            name="Bagi-Profit">Save</button>
+                                                                            name="Bagi-Profit">Input</button>
                                                                     </div>
                                                                 </form>
                                                             </div>
@@ -177,7 +176,7 @@ $juhal = "Share Profit";
                                                 <th width="3%">No</th>
                                                 <th>Email</th>
                                                 <th>Profit</th>
-                                                <th>Wallet Saldo</th>
+                                                <!-- <th>Saldo Bonus</th> -->
 
                                             </tr>
                                         </thead>
@@ -191,7 +190,7 @@ $juhal = "Share Profit";
                                                 <td><?= $i ?></td>
                                                 <td><?= $row["email"] ?></td>
                                                 <td><?= number_format($row["input"]) ?></td>
-                                                <td><?= number_format($row["saldo"]) ?></td>
+                                                <!-- <td><?= number_format($row["saldo"]) ?></td> -->
 
                                             </tr>
                                             <?php $i++; ?>

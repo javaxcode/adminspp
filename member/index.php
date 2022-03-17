@@ -33,7 +33,7 @@ $juhal = "Member";
                 <!-- Start Content-->
                 <div class="container-fluid">
 
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="col-xl-3 col-md-6">
                             <div class="card">
                                 <div class="card-body widget-user">
@@ -85,7 +85,7 @@ $juhal = "Member";
                             </div>
 
                         </div>
-                    </div>
+                    </div> -->
                     <!-- end row -->
 
                     <div class="row">
@@ -103,7 +103,7 @@ $juhal = "Member";
                                                 <th>Username</th>
                                                 <th>Affiliasi</th>
                                                 <th>Nama</th>
-                                                <th>Hp</th>
+                                                <!-- <th>Hp</th> -->
                                                 <th>Profil</th>
                                                 <th>Action</th>
 
@@ -127,7 +127,7 @@ $juhal = "Member";
                                                         ?>
                                                     <?= $datamember['nama_depan'] . ' ' . $datamember['nama_belakang'] ?>
                                                 </td>
-                                                <td><?= $datamember['telepon'] ?></td>
+                                                <!-- <td><?= $datamember['telepon'] ?></td> -->
                                                 <td>
                                                     <button type="button"
                                                         class="btn btn-primary btn-xs waves-effect waves-light"
@@ -231,7 +231,16 @@ $juhal = "Member";
                                                     </div><!-- /.modal -->
                                                 </td>
                                                 <td class="actions">
-                                                    <!-- <button type="button" class="btn btn-success btn-xs waves-effect waves-light"><i class="mdi mdi-thumb-up"></i></button> | -->
+                                                    <!-- <?php
+                                                                $email = $row['email'];
+                                                                $cekdata = mysqli_query($conn, "SELECT email FROM validasi WHERE email ='$email' ");
+                                                                ?>
+                                                    <?php if (mysqli_num_rows($cekdata) < 1) : ?>
+                                                    <a href="make-account.php?id=<?= $row["id"] ?>">
+                                                        <button type="button"
+                                                            class="btn btn-success btn-xs waves-effect waves-light">Make
+                                                            Account</button> |
+                                                        <?php endif; ?> -->
                                                     <a href="add/hapususer.php?id=<?= $row["id"] ?>"><button
                                                             type="button"
                                                             onClick="if(confirm('Apakah anda yakin akan menghapus data ?')){return true}else{return false}"

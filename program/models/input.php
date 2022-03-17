@@ -95,6 +95,7 @@ if (isset($_POST["bagi-profit"])) {
 
     //echo 'Share SPP21 ' . $profispp21 . '<br>';
     /*query insert data profit perusahaan*/
+
     $cekdata = mysqli_query($conn, "SELECT email FROM wallet WHERE email ='spp21indonesia@gmail.com' AND kategori='PROFIT' ");
     if (mysqli_num_rows($cekdata) < 1) {
         $saldo = 0;
@@ -104,31 +105,34 @@ if (isset($_POST["bagi-profit"])) {
     }
     $totalsaldo = $saldo + $profispp21;
     $keterangan = "Share Profit " . $memberusername;
+    $emailspp = "spp21indonesia@gmail.com";
     /*query insert data*/
     $query = "INSERT INTO wallet 
     VALUES 
-        ('','$emailaff','$tang','$jam','$kategori','$keterangan','$profispp21','0','$totalsaldo')
+        ('','$emailspp','$tang','$jam','$kategori','$keterangan','$profispp21','0','$totalsaldo')
     ";
     mysqli_query($conn, $query);
 
 
     //echo $email . ' - ' . $rankmember . ' - ' . $profitmember . '<br>';
     /*query insert data profit member*/
-    $cekdata = mysqli_query($conn, "SELECT email FROM wallet WHERE email ='$email' AND kategori='PROFIT' ");
-    if (mysqli_num_rows($cekdata) < 1) {
-        $saldo = 0;
-    } else {
-        $set = query("SELECT * FROM wallet WHERE email ='$email' AND kategori='PROFIT' ORDER BY id DESC LIMIT 1")[0];
-        $saldo = $set['saldo'];
-    }
-    $totalsaldo = $saldo + $profitmember;
-    $keterangan = "Share Profit";
-    /*query insert data*/
-    $query = "INSERT INTO wallet 
+    if ($rankmember != "Basic") {
+        $cekdata = mysqli_query($conn, "SELECT email FROM wallet WHERE email ='$email' AND kategori='PROFIT' ");
+        if (mysqli_num_rows($cekdata) < 1) {
+            $saldo = 0;
+        } else {
+            $set = query("SELECT * FROM wallet WHERE email ='$email' AND kategori='PROFIT' ORDER BY id DESC LIMIT 1")[0];
+            $saldo = $set['saldo'];
+        }
+        $totalsaldo = $saldo + $profitmember;
+        $keterangan = "Share Profit";
+        /*query insert data*/
+        $query = "INSERT INTO wallet 
     VALUES 
         ('','$email','$tang','$jam','$kategori','$keterangan','$profitmember','0','$totalsaldo')
     ";
-    mysqli_query($conn, $query);
+        mysqli_query($conn, $query);
+    }
 
     /*cek apakah data berhasil di input*/
     if (mysqli_affected_rows($conn) > 0) {

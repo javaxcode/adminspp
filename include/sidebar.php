@@ -47,7 +47,7 @@
                     <div class="collapse" id="sidebarTasks">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="../layanan/validasi-akun">Account Validation</a>
+                                <a href="../layanan/validasi-akun">Account Member</a>
                             </li>
                             <li>
                                 <a href="../layanan/deposit">Deposit</a>

@@ -34,6 +34,14 @@
  <!-- Init js-->
  <script src="../assets/js/pages/form-advanced.init.js"></script>
 
+ <!-- Plugins js-->
+ <script src="../assets/libs/flatpickr/flatpickr.min.js"></script>
+ <script src="../assets/libs/spectrum-colorpicker2/spectrum.min.js"></script>
+ <script src="../assets/libs/clockpicker/bootstrap-clockpicker.min.js"></script>
+ <script src="../assets/libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+ <!-- Init js-->
+ <script src="../assets/js/pages/form-pickers.init.js"></script>
+
  <!-- knob plugin -->
  <script src="../assets/libs/jquery-knob/jquery.knob.min.js"></script>
 
