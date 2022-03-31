@@ -25,7 +25,15 @@ $juhal = "Withdrawal";
 
 <body class="loading"
     data-layout='{"mode": "light", "width": "fluid", "menuPosition": "fixed", "sidebar": { "color": "light", "size": "default", "showuser": true}, "topbar": {"color": "light"}, "showRightSidebarOnPageLoad": false}'>
-
+    <div id="loadingWrapper" class="card w-100 position-absolute"
+        style="display:none;background-color: #08080887;z-index: 9999;">
+        <div class="card-body w-100 d-flex flex-column justify-content-center align-items-center" style="
+    height: 100vh;">
+            <i class="fas fa-dollar-sign fa-pulse fa-5x text-warning"></i>
+            <br>
+            <h4 class="text-white"><strong>Please wait..</strong></h4>
+        </div>
+    </div>
     <!-- Begin page -->
     <div id="wrapper">
 
@@ -168,7 +176,8 @@ $juhal = "Withdrawal";
                                                 <td class="actions">
                                                     <?php if ($row['status'] != 0) : ?>
                                                     <?php if ($row['status'] != 2) : ?>
-                                                    <a href="models/ewithdrawal.php?id=<?= $row["id"] ?>&status=2"><button
+                                                    <a href="models/ewithdrawal.php?id=<?= $row["id"] ?>&status=2&email=<?= $row["email"] ?>"
+                                                        onClick="document.querySelector('#loadingWrapper').style.display = 'flex'"><button
                                                             type=" button"
                                                             class="btn btn-success btn-xs waves-effect waves-light"><i
                                                                 class="mdi mdi-thumb-up"></i></button></a> |
@@ -179,7 +188,8 @@ $juhal = "Withdrawal";
                                                                 class="mdi mdi-delete"></i></button></a> |
                                                     <?php endif; ?>
                                                     <?php if ($row['status'] != 3) : ?>
-                                                    <a href="models/ewithdrawal.php?id=<?= $row["id"] ?>&status=3"><button
+                                                    <a href="models/ewithdrawal.php?id=<?= $row["id"] ?>&status=3&email=<?= $row["email"] ?>"
+                                                        onClick="document.querySelector('#loadingWrapper').style.display = 'flex'"><button
                                                             type=" button"
                                                             class="btn btn-warning btn-xs waves-effect waves-light">X</button></a>
                                                     <?php endif; ?>

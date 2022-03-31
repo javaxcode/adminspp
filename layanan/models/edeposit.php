@@ -1,15 +1,16 @@
-
 <?php
 
 require '../../include/fungsi.php';
 
 $idd = $_GET["id"];
 $status = $_GET["status"];
+$email = $_GET["email"];
+
 $redirect = "../deposit";
 if ($status == 2) {
-    $alert = "deposit sukses";
+    $alert = "Deposit Success";
 } elseif ($status == 3) {
-    $alert = "deposit gagal";
+    $alert = "Deposit Failed";
 }
 
 // date_default_timezone_set('Asia/Jakarta'); 
@@ -33,51 +34,55 @@ mysqli_query($conn, $query);
 
 //cek apakah data berhasil di edit
 if (mysqli_affected_rows($conn) > 0) {
-    echo "          
+
+    /*ambil data dari tabel validasi*/
+    $ceka = mysqli_query($conn, "SELECT * FROM validasi WHERE email = '$email'");
+    $data = mysqli_fetch_array($ceka);
+    $cEmail = $data['email'];
+    // $cNama = $data['nama'];
+    // $no_akun = $data['no_akun'];
+    // $broker = $data['broker'];
+
+    $ceku = mysqli_query($conn, "SELECT * FROM users WHERE email = '$cEmail'");
+    $user = mysqli_fetch_array($ceku);
+    $cUser = $user['username'];
+
+    $subject = "Deposit Notification SPP21";
+    $titleMsg = "Deposit Notification";
+    if ($status == 2) {
+        $descriptionMsg = "Hello " . $cUser . "! <br> Your deposit has been approved by admin!";
+    } else {
+        $descriptionMsg = "Hello " . $cUser . "! <br> Your deposit has been rejected by admin!";
+    }
+    $btnMsg = "Back to dashboard";
+    // $bccAddress = "support@mamspp21.com";
+
+    $mailer = query("SELECT * FROM mailer WHERE 1")[0];
+
+    $mailhost1 = $mailer['mailhost1'];
+    $username1 = $mailer['username1'];
+    $password1 = $mailer['password1'];
+    $setfrom1 = $mailer['setfrom1'];
+
+    if ($_SERVER['HTTP_HOST'] != "localhost") {
+        $linkhref = "https://mamspp21.com/dashboard/index";
+    } else {
+        $linkhref = "localhost/newmamps/dashboard/index";
+    }
+
+    include '../../mail/mail_confirmpass.php';
+    include './m_mail.php';
+
+    if ($mail->Send()) {
+        echo "
         <script>
             alert('$alert');
             document.location.href = '$redirect';
         </script>
         ";
-
-    /*ambil data dari tabel validasi*/
-    // $ceka = mysqli_query($conn, "SELECT * FROM validasi WHERE id = $idd");
-    // $data = mysqli_fetch_array($ceka);
-    // $cEmail = $data['email'];
-    // $cNama = $data['nama'];
-    // $no_akun = $data['no_akun'];
-    // $broker = $data['broker'];
-
-    // $ceku = mysqli_query($conn, "SELECT * FROM user WHERE email = '" . $cEmail . "'");
-    // $user = mysqli_fetch_array($ceku);
-    // $cUser = $user['username'];
-
-
-    // require '../mail/valid.php';
-
-    // require_once('../classes/class.phpmailer.php');
-
-
-    // $email = $cEmail;
-    // $SubjectMsg = "Validasi Akun sukses";
-    // $bodyMsg = $message;
-
-    // require '../mail/scriptmailer.php';
-
-    // $mail->Subject  =  $SubjectMsg;
-    // $mail->IsHTML(true);
-    // $mail->Body    = $bodyMsg;
-
-    // if ($mail->Send()) {
-    //     echo '
-    //                 <script> alert("validasi sukses"); 
-    //                         document.location.href = "../validasi-akun";
-    //                 </script>
-    //                 ';
-    // } else {
-    //     echo "Mail Error - >" . $mail->ErrorInfo;
-    // }
-
+    } else {
+        echo "Mail Error - >" . $mail->ErrorInfo;
+    }
 } else {
     echo "
             <script>
@@ -158,6 +163,3 @@ if (mysqli_affected_rows($conn) > 0) {
 //         </script>
 //         ";
 // }
-
-
-?>
